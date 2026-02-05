@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XFxutrq8Ykk=",
+  "dgSpecHash": "C6u16yaTXCk=",
   "success": true,
-  "projectFilePath": "F:\\CUProject\\BlackMossTemplate\\BlackMossTemplate\\BlackMossTemplate.csproj",
+  "projectFilePath": "F:\\CUProject\\UndeadExperiment\\UndeadExperiment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.analyzers\\1.0.8\\bepinex.analyzers.1.0.8.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\bepinex.assemblypublicizer.msbuild\\0.4.2\\bepinex.assemblypublicizer.msbuild.0.4.2.nupkg.sha512",

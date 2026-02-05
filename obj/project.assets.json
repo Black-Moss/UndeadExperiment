@@ -1130,11 +1130,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\CUProject\\BlackMossTemplate\\BlackMossTemplate\\BlackMossTemplate.csproj",
-      "projectName": "BlackMossTemplate",
-      "projectPath": "F:\\CUProject\\BlackMossTemplate\\BlackMossTemplate\\BlackMossTemplate.csproj",
+      "projectUniqueName": "F:\\CUProject\\UndeadExperiment\\UndeadExperiment.csproj",
+      "projectName": "UndeadExperiment",
+      "projectPath": "F:\\CUProject\\UndeadExperiment\\UndeadExperiment.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "F:\\CUProject\\BlackMossTemplate\\BlackMossTemplate\\obj\\",
+      "outputPath": "F:\\CUProject\\UndeadExperiment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
