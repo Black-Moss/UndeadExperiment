@@ -1,8 +1,8 @@
 <Project>
-  <PropertyGroup>
-    <BaseGamePath>E:/CasualtiesUnknownDemo</BaseGamePath> <!--Set this to the game's main folder-->
-    <BepInExDir>$(BaseGamePath)/BepInEx</BepInExDir>
-    <GameAssembliesDir>$(BaseGamePath)/CasualtiesUnknown_Data/Managed</GameAssembliesDir>
-	  <PluginDirName>UndeadExperiment</PluginDirName>
-  </PropertyGroup>
+    <PropertyGroup>
+        <BaseGamePath>E:/CasualtiesUnknownDemo</BaseGamePath> <!--Set this to the game's main folder-->
+        <BepInExDir>$(BaseGamePath)/BepInEx</BepInExDir>
+        <GameAssembliesDir>$(BaseGamePath)/CasualtiesUnknown_Data/Managed</GameAssembliesDir>
+        <PluginDirName>UndeadExperiment</PluginDirName>
+    </PropertyGroup>
 </Project>
