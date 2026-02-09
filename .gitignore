@@ -3,4 +3,4 @@
 /.idea/
 /bin/
 /obj/
-
+/obj/Debug/net472/UndeadExperiment.AssemblyInfo.cs
