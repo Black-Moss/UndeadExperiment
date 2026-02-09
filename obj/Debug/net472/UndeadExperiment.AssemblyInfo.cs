@@ -12,11 +12,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("UndeadExperiment")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd0ade887633cec429a2e157b0c2b0219c6c3341")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+7f0e3de7c9164f2b2e41f12455b04fd44bce127c")]
 [assembly: System.Reflection.AssemblyProductAttribute("UndeadExperiment")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UndeadExperiment")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/Black-Moss/UndeadExperiment")]
 
 // 由 MSBuild WriteCodeFragment 类生成。

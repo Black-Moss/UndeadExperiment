@@ -1,23 +1,32 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 
 namespace UndeadExperiment;
 
-[BepInPlugin("blackmoss.undeadexperiment", "Undead Experiment", "1.0.0")]
+[BepInPlugin("blackmoss.undeadexperiment", "Undead Experiment", "1.0.1")]
 public class Plugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger;
     private readonly Harmony _harmony = new("blackmoss.undeadexperiment");
     public static Plugin Instance { get; private set; } = null!;
-    private bool isHealingLoopRunning;
+    
+    private bool _isHealingLoopRunning;
+    private static ConfigEntry<float> configHealCountdown;
 
     private void Awake()
     {
         Logger = base.Logger;
         Instance = this;
         _harmony.PatchAll();
+        
+        configHealCountdown = Config.Bind(
+            "General",
+            "ConfigHealCountdown",
+            1f
+        );
     }
 
     [HarmonyPatch(typeof(global::Body), "Awake")]
@@ -29,16 +38,16 @@ public class Plugin : BaseUnityPlugin
             if (Instance != null)
             {
                 //半秒执行一次
-                Instance.StartHealingLoop(0.5f);
+                Instance.StartHealingLoop(configHealCountdown.Value);
             }
         }
     }
 
     public void StartHealingLoop(float interval = 5f)
     {
-        if (!isHealingLoopRunning)
+        if (!_isHealingLoopRunning)
         {
-            isHealingLoopRunning = true;
+            _isHealingLoopRunning = true;
             StartCoroutine(HealingLoop(interval));
         }
     }
@@ -46,12 +55,12 @@ public class Plugin : BaseUnityPlugin
     // 停止循环治疗
     public void StopHealingLoop()
     {
-        isHealingLoopRunning = false;
+        _isHealingLoopRunning = false;
     }
     
     private System.Collections.IEnumerator HealingLoop(float interval)
     {
-        while (isHealingLoopRunning)
+        while (_isHealingLoopRunning)
         {
             Heal();
             yield return new WaitForSeconds(interval);
