@@ -6,15 +6,16 @@ using UnityEngine;
 
 namespace UndeadExperiment;
 
-[BepInPlugin("blackmoss.undeadexperiment", "Undead Experiment", "1.0.1")]
+[BepInPlugin("com.blackmoss.undeadexperiment", "Undead Experiment", "1.0.1")]
 public class Plugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger;
-    private readonly Harmony _harmony = new("blackmoss.undeadexperiment");
+    private readonly Harmony _harmony = new("com.blackmoss.undeadexperiment");
     public static Plugin Instance { get; private set; } = null!;
     
-    private bool _isHealingLoopRunning;
-    private static ConfigEntry<float> configHealCountdown;
+    // ReSharper disable once InconsistentNaming
+    private bool isHealingLoopRunning;
+    private static ConfigEntry<float> _configHealCountdown;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class Plugin : BaseUnityPlugin
         Instance = this;
         _harmony.PatchAll();
         
-        configHealCountdown = Config.Bind(
+        _configHealCountdown = Config.Bind(
             "General",
             "ConfigHealCountdown",
             1f
@@ -38,16 +39,16 @@ public class Plugin : BaseUnityPlugin
             if (Instance != null)
             {
                 //半秒执行一次
-                Instance.StartHealingLoop(configHealCountdown.Value);
+                Instance.StartHealingLoop(_configHealCountdown.Value);
             }
         }
     }
 
     public void StartHealingLoop(float interval = 5f)
     {
-        if (!_isHealingLoopRunning)
+        if (!isHealingLoopRunning)
         {
-            _isHealingLoopRunning = true;
+            isHealingLoopRunning = true;
             StartCoroutine(HealingLoop(interval));
         }
     }
@@ -55,12 +56,12 @@ public class Plugin : BaseUnityPlugin
     // 停止循环治疗
     public void StopHealingLoop()
     {
-        _isHealingLoopRunning = false;
+        isHealingLoopRunning = false;
     }
     
     private System.Collections.IEnumerator HealingLoop(float interval)
     {
-        while (_isHealingLoopRunning)
+        while (isHealingLoopRunning)
         {
             Heal();
             yield return new WaitForSeconds(interval);
