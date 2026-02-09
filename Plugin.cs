@@ -25,7 +25,7 @@ public class Plugin : BaseUnityPlugin
         
         _configHealCountdown = Config.Bind(
             "General",
-            "ConfigHealCountdown",
+            "HealCountdown",
             1f
         );
     }
