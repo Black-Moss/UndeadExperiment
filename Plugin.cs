@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace UndeadExperiment;
 
-[BepInPlugin("com.blackmoss.undeadexperiment", "Undead Experiment", "1.0.1")]
+[BepInPlugin("blackmoss.undeadexperiment", "Undead Experiment", "1.0.1")]
 public class Plugin : BaseUnityPlugin
 {
     internal new static ManualLogSource Logger;
-    private readonly Harmony _harmony = new("com.blackmoss.undeadexperiment");
+    private readonly Harmony _harmony = new("blackmoss.undeadexperiment");
     public static Plugin Instance { get; private set; } = null!;
     
     // ReSharper disable once InconsistentNaming
