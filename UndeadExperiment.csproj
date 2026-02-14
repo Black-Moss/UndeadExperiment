@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net472</TargetFramework>
-        <AssemblyName>UndeadExperiment</AssemblyName>
-        <Product>UndeadExperiment</Product>
+        <AssemblyName>Undead-Experiment</AssemblyName>
+        <Product>Undead-Experiment</Product>
         <Version>1.0.1</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
@@ -368,14 +368,6 @@
             <HintPath>E:\CasualtiesUnknownDemo\CasualtiesUnknown_Data\Managed\UnityEngine.XRModule.dll</HintPath>
         </Reference>
     </ItemGroup>
-
-    <PropertyGroup>
-        <RequiredFilesToCopy>
-            $(AssemblyName).dll;
-        </RequiredFilesToCopy>
-        <RequiredFoldersToCopy>
-        </RequiredFoldersToCopy>
-    </PropertyGroup>
 
     <Target Name="CopyOutputDllsToPluginsFolder" AfterTargets="AfterBuild" Condition="'$(RequiredFilesToCopy)'!=''">
         <MakeDir Directories="$(BepInExDir)/plugins/$(PluginDirName)"/>
