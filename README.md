@@ -1,4 +1,4 @@
-﻿![Logo](Undead_Experiment_Logo.png)
+﻿![covor](Covor.png)
 # Undead Experiment
 A simple mod, like ever second run `heal` command.
 
