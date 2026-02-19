@@ -10,14 +10,14 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("UndeadExperiment")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Undead-Experiment")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+b30591f458e9657c08444dba9d8c98787e5e99c7")]
-[assembly: System.Reflection.AssemblyProductAttribute("UndeadExperiment")]
-[assembly: System.Reflection.AssemblyTitleAttribute("UndeadExperiment")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/Black-Moss/UndeadExperiment")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.2.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.2+51db97978f101b27e5ed7d0e19b10f4e47de84cf")]
+[assembly: System.Reflection.AssemblyProductAttribute("Undead-Experiment")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Undead-Experiment")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.0.2.0")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/Black-Moss/Undead-Experiment")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
 

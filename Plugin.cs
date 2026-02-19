@@ -14,8 +14,7 @@ public class Plugin : BaseUnityPlugin
     private static Plugin Instance { get; set; } = null!;
     
     // ReSharper disable once InconsistentNaming
-    private bool isHealingLoopRunning;
-    // ReSharper disable once InconsistentNaming
+    // ReSharper disable once MemberCanBePrivate.Global
     public static ConfigEntry<float> ConfigHealCountdown;
 
     private void Awake()
@@ -31,41 +30,20 @@ public class Plugin : BaseUnityPlugin
         );
     }
 
-    [HarmonyPatch(typeof(global::Body), "Awake")]
-    public class BodyAwakePatch
+    [HarmonyPatch(typeof(global::Body), "Update")]
+    public class BodyPatch
     {
-        public static void Postfix() // 改为静态方法
+        private static float _healTimer = 0f;
+
+        [HarmonyPostfix]
+        public static void Postfix_Body_Update()
         {
-            // 如果想在Body创建时启动循环，可以通过Instance访问
-            if (Instance != null)
+            _healTimer += Time.deltaTime;
+            while (_healTimer >= ConfigHealCountdown.Value)
             {
-                //半秒执行一次
-                Instance.StartHealingLoop(Configs.HealCountdown);
+                Heal();
+                _healTimer -= ConfigHealCountdown.Value;
             }
-        }
-    }
-
-    public void StartHealingLoop(float interval = 5f)
-    {
-        if (!isHealingLoopRunning)
-        {
-            isHealingLoopRunning = true;
-            StartCoroutine(HealingLoop(interval));
-        }
-    }
-
-    // 停止循环治疗
-    public void StopHealingLoop()
-    {
-        isHealingLoopRunning = false;
-    }
-    
-    private System.Collections.IEnumerator HealingLoop(float interval)
-    {
-        while (isHealingLoopRunning)
-        {
-            Heal();
-            yield return new WaitForSeconds(interval);
         }
     }
 
