@@ -6,6 +6,8 @@ You can customize **all** ***supported*** **healing effects** in the configurati
 
 Use the `undeadmode` command **in-game** to toggle Undead Mode!
 
+__Requires [Moss Lib](https://github.com/Black-Moss/Moss-Lib) as a prerequisite!__
+
 ## Configs `blackmoss.undeadexperiment.cfg`(excluding healing effects):
 * `HealCountdown`: The interval between every time heal, *default: 1f*.
 * `UndeadMode`: Toggles undead mode on/off.
@@ -16,6 +18,9 @@ Use the `undeadmode` command **in-game** to toggle Undead Mode!
 在配置文件中可以**自定义所有*****模组支持*****的治疗效果！**
 
 **在游戏中**运行`undeadmode`命令以启用/禁用不死模式！
+
+__需要[Moss Lib](https://github.com/Black-Moss/Moss-Lib)作为前置！__
+
 
 ## 配置 `blackmoss.undeadexperiment.cfg`（不包括治疗效果）：
 * `HealCountdown`：每次治疗的间隔，默认：*1f*
