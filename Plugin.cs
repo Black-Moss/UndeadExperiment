@@ -323,7 +323,7 @@ public class Plugin : BaseUnityPlugin
         // ReSharper disable once UnusedMember.Global
         public static void Undead_Experiment()
         {
-            if (!ModConfigs.UndeadMode) return;
+            Logger.LogInfo("111");
             _healTimer += Time.deltaTime;
             while (_healTimer >= ModConfigs.HealCountdown)
             {
@@ -351,45 +351,47 @@ public class Plugin : BaseUnityPlugin
         }
 
         var body = PlayerCamera.main.body;
-        body.brainHealth = ModConfigs.BrainHealth;
-        body.bloodAmount = ModConfigs.BloodAmount;
-        body.bloodViscous = ModConfigs.BloodViscous;
-        body.oxygenAmount = ModConfigs.OxygenAmount;
-        body.hunger = ModConfigs.Hunger;
-        body.thirst = ModConfigs.Thirst;
-        body.temperature = ModConfigs.Temperature;
-        body.consciousness = ModConfigs.Consciousness;
-        body.stamina = ModConfigs.Stamina;
-        body.energy = ModConfigs.Energy;
-        body.sicknessAmount = ModConfigs.SicknessAmount;
-        body.septicShock = ModConfigs.SepticShock;
-        body.radiationSickness = ModConfigs.RadiationSickness;
-        body.traumaAmount = ModConfigs.TraumaAmount;
-        body.internalBleeding = ModConfigs.InternalBleeding;
-        body.hemothorax = ModConfigs.Hemothorax;
-        body.dirtyness = ModConfigs.Dirtyness;
-        body.wetness = ModConfigs.Wetness;
-        body.happiness = ModConfigs.Happiness;
-        body.antidepressantHappiness = ModConfigs.AntidepressantHappiness;
-        body.opiateHappiness = ModConfigs.OpiateHappiness;
-        body.hearingLoss = ModConfigs.HearingLoss;
-        body.weightOffset = ModConfigs.WeightOffset;
-        body.badSleepAmount = ModConfigs.BadSleepAmount;
-        body.adrenaline = ModConfigs.Adrenaline;
-        body.curAdrenaline = ModConfigs.CurAdrenaline;
-        body.antibioticImmunityTime = ModConfigs.AntibioticImmunityTime;
-        body.brainGrowSickness = ModConfigs.BrainGrowSickness;
-        body.disfigured = ModConfigs.Disfigured;
-        body.eyeGone = ModConfigs.EyeGone;
-        body.triedRollingLastStand = ModConfigs.TriedRollingLastStand;
+        body.brainHealth                = ModConfigs.BrainHealth;
+        body.bloodAmount                = ModConfigs.BloodAmount;
+        body.bloodViscous               = ModConfigs.BloodViscous;
+        body.oxygenAmount               = ModConfigs.OxygenAmount;
+        body.hunger                     = ModConfigs.Hunger;
+        body.thirst                     = ModConfigs.Thirst;
+        body.temperature                = ModConfigs.Temperature;
+        body.consciousness              = ModConfigs.Consciousness;
+        body.stamina                    = ModConfigs.Stamina;
+        body.energy                     = ModConfigs.Energy;
+        body.sicknessAmount             = ModConfigs.SicknessAmount;
+        body.septicShock                = ModConfigs.SepticShock;
+        body.radiationSickness          = ModConfigs.RadiationSickness;
+        body.traumaAmount               = ModConfigs.TraumaAmount;
+        body.internalBleeding           = ModConfigs.InternalBleeding;
+        body.hemothorax                 = ModConfigs.Hemothorax;
+        body.dirtyness                  = ModConfigs.Dirtyness;
+        body.wetness                    = ModConfigs.Wetness;
+        body.happiness                  = ModConfigs.Happiness;
+        body.antidepressantHappiness    = ModConfigs.AntidepressantHappiness;
+        body.opiateHappiness            = ModConfigs.OpiateHappiness;
+        body.hearingLoss                = ModConfigs.HearingLoss;
+        body.weightOffset               = ModConfigs.WeightOffset;
+        body.badSleepAmount             = ModConfigs.BadSleepAmount;
+        body.adrenaline                 = ModConfigs.Adrenaline;
+        body.curAdrenaline              = ModConfigs.CurAdrenaline;
+        body.antibioticImmunityTime     = ModConfigs.AntibioticImmunityTime;
+        body.brainGrowSickness          = ModConfigs.BrainGrowSickness;
+        body.disfigured                 = ModConfigs.Disfigured;
+        body.eyeGone                    = ModConfigs.EyeGone;
+        body.triedRollingLastStand      = ModConfigs.TriedRollingLastStand;
         body.succesfullyRolledLastStand = ModConfigs.SuccesfullyRolledLastStand;
-        body.lastStandTime = ModConfigs.LastStandTime;
+        body.lastStandTime              = ModConfigs.LastStandTime;
 
-        if (PlayerCamera.main.body.TryGetComponent<Painkillers>(out var component1))
+        if (PlayerCamera.main.body.TryGetComponent(out Painkillers component1))
             Destroy(component1);
-        if (PlayerCamera.main.body.TryGetComponent<SleepingPills>(out var component2))
+        if (PlayerCamera.main.body.TryGetComponent(out SleepingPills component2))
             Destroy(component2);
-        if (PlayerCamera.main.body.TryGetComponent<Antidepressants>(out var component3))
+        if (PlayerCamera.main.body.TryGetComponent(out Antidepressants component3))
             Destroy(component3);
+        CoUtils.instance.Stop("bleach");
+        CoUtils.instance.Stop("mercury");
     }
 }
