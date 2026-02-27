@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace UndeadExperiment;
 
-[BepInPlugin("blackmoss.undeadexperiment", "Undead Experiment", "1.1.0")]
+[BepInPlugin(Guid, Name, "1.1.1")]
+[BepInDependency("blackmoss.mosslib")]
 public class Plugin : BaseUnityPlugin
 {
     public new static ManualLogSource Logger;
-    internal const string HarmonyPath = "blackmoss.undeadexperiment";
-    private readonly Harmony _harmony = new(HarmonyPath);
+    internal const string Guid = "blackmoss.undeadexperiment";
+    internal const string Name = "Undead Experiment";
+    private readonly Harmony _harmony = new(Guid);
     // ReSharper disable once UnusedAutoPropertyAccessor.Local
     private static Plugin Instance { get; set; } = null!;
     
@@ -71,9 +73,9 @@ public class Plugin : BaseUnityPlugin
     {
         Logger = base.Logger;
         Instance = this;
+        ModLocale.Initialize(Logger);
+        ModCommand.Initialize(Logger);
         _harmony.PatchAll();
-        
-        ModCommand.Initialize();
         
         //  General
         ConfigHealCountdown = Config.Bind(
@@ -319,7 +321,7 @@ public class Plugin : BaseUnityPlugin
 
         [HarmonyPostfix]
         // ReSharper disable once UnusedMember.Global
-        public static void Postfix_Body_Update()
+        public static void Undead_Experiment()
         {
             if (!ModConfigs.UndeadMode) return;
             _healTimer += Time.deltaTime;

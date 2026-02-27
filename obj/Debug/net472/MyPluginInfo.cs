@@ -4,6 +4,6 @@ namespace UndeadExperiment
     {
         public const string PLUGIN_GUID = "Undead-Experiment";
         public const string PLUGIN_NAME = "Undead-Experiment";
-        public const string PLUGIN_VERSION = "1.1.0";
+        public const string PLUGIN_VERSION = "1.1.1";
     }
 }

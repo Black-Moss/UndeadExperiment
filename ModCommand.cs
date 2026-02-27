@@ -1,33 +1,43 @@
 ﻿using System;
+using System.Reflection;
+using BepInEx.Logging;
 using HarmonyLib;
+using MossLib.Base;
 using UnityEngine;
 
 namespace UndeadExperiment;
 
-public static class ModCommand
+public class ModCommand : ModCommandBase
 {
-    private static string _lastErr = "";
-
-    public static void Initialize()
-    {
-        new Harmony($"{Plugin.HarmonyPath}.customcommand").PatchAll(typeof(ModCommand));
+    private static ModCommand Instance { get; set; } = new();
+    
+    private static ModCommand _instance;
+    
+    public static void Initialize(ManualLogSource logger)
+    { 
+        if (_instance != null) return;
+        _instance = new ModCommand();
+        Instance = _instance;
+        _instance.Initialize(logger, Plugin.Guid, Plugin.Name, Assembly.GetExecutingAssembly());
     }
 
     [HarmonyPatch(typeof(ConsoleScript), "RegisterAllCommands")]
-    public static class ConsoleScriptPatcher
+    public static class ConsoleScriptRegisterAllCommandsPatcher
     {
         [HarmonyPostfix]
         // ReSharper disable once UnusedMember.Global
-        public static void Postfix_ConsoleScript_RegisterAllCommands()
+        public static void RegisterCustomCommands()
         {
-            ConsoleScript.Commands.Add(new Command("undeadmode", "Toggles undead mode on/off.",
-                (Command.Action) (args =>
+            ConsoleScript.Commands.Add(new Command(
+                "undeadmode", 
+                ModLocale.GetFormat("command.undeadmode"),
+                args =>
                 {
-                    CheckForWorld();
+                    Instance.CheckForWorld();
                     bool newState;
                     if (args.Length > 1)
                     {
-                        newState = ParseBool(args[1]);
+                        newState = Instance.ParseBool(args[1]);
                     }
                     else
                     {
@@ -35,69 +45,28 @@ public static class ModCommand
                     }
                     
                     Plugin.ConfigUndeadMode.Value = newState;
-                    
-                    var message = newState ? "Undead Mode Enabled!" : "Undead Mode Disabled!";
-                    var statusMessage = $"Undead Mode: {newState}";
+
+                    var message = newState ? 
+                        ModLocale.GetFormat("undeadmode.enable") : 
+                        ModLocale.GetFormat("undeadmode.disable");
+                    var statusMessage = ModLocale.GetFormat("undeadmode.state", newState);
                     
                     PlayerCamera.main.DoAlert(message);
-                    LogToConsole(statusMessage);
+                    Instance.LogToConsole(statusMessage);
                     Plugin.Logger.LogInfo(statusMessage);
-                }), null,
-                ("bool", "Enable undead mode? (optional)")));
-        }
-    }
-
-    private static void LogToConsole(string text)
-    {
-        if (ConsoleScript.instance != null)
-        {
-            ConsoleScript.instance.ExecuteCommand($"log {text.Replace(" ", " ")}");
-        }
-    }
-
-    private static void ApplicationLogCallback(string condition, string stackTrace, LogType type)
-    {
-        if (_lastErr == condition)
-            return;
-            
-        _lastErr = condition;
-
-        switch (type)
-        {
-            case LogType.Error or LogType.Assert:
-                LogToConsole($"<color=red>{condition}; {stackTrace}</color>");
-                break;
-            case LogType.Warning:
-                LogToConsole($"<color=yellow>{condition}; {stackTrace}</color>");
-                break;
-            case LogType.Log:
-                LogToConsole(condition);
-                break;
-            case LogType.Exception:
-                LogToConsole($"<color=red>{condition}; {stackTrace}</color>");
-                break;
+                }, null,
+                ("bool", ModLocale.GetFormat("undeadmode.input"))));
         }
     }
 
     [HarmonyPatch(typeof(ConsoleScript), "Awake")]
-    public static class ConsoleScriptAwakePatcher
+    public new class ConsoleScriptAwakePatcher
     {
         [HarmonyPostfix]
         // ReSharper disable once UnusedMember.Global
-        public static void Postfix_ConsoleScript_Awake()
+        public static void AddCustomLogCallback()
         {
-            Application.logMessageReceived += ApplicationLogCallback;
+            Application.logMessageReceived += Instance.ApplicationLogCallback;
         }
-    }
-
-    private static bool ParseBool(string s)
-    {
-        return !bool.TryParse(s, out var result) ? throw new Exception($"\"{s}\" is not a valid boolean value! (true/false)") : result;
-    }
-    
-    private static void CheckForWorld()
-    {
-        if (!(bool) (UnityEngine.Object) PlayerCamera.main)
-            throw new Exception("No world is loaded. Try starting a game?");
     }
 }
