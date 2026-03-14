@@ -1,11 +1,9 @@
 ﻿{
   "command": {
-    "undeadmode": "切换不死模式"
-  },
-  "undeadmode": {
-    "enable": "不死模式启动！",
-    "disable": "不死模式关闭！",
-    "state": "不死模式：{0}",
-    "input": "启用不死模式？（可选）"
+    "undeadmode": {
+      "name": "不死模式",
+      "description": "切换不死模式",
+      "input": "启用不死模式？（可选）"
+    }
   }
 }

@@ -1,4 +1,8 @@
 ﻿![covor](Covor.png)
+__This mod is being refactored, please do not use it! Its original features have been migrated to [Moss Lib](https://github.com/Black-Moss/Moss-Lib)!__
+
+__警告：此模组正在重构，请勿使用！其原始功能已被迁移到[Moss Lib](https://github.com/Black-Moss/Moss-Lib)！__
+```
 # Undead Experiment
 A simple mod, like ever second run `heal` command.
 
@@ -25,3 +29,4 @@ __需要[Moss Lib](https://github.com/Black-Moss/Moss-Lib)作为前置！__
 ## 配置 `blackmoss.undeadexperiment.cfg`（不包括治疗效果）：
 * `HealCountdown`：每次治疗的间隔，默认：*1f*
 * `UndeadMode`：启用/禁用不死模式。
+```

@@ -1,11 +1,9 @@
 ﻿{
   "command": {
-    "undeadmode": "Toggles undead mode on/off."
-  },
-  "undeadmode": {
-    "enable": "Undead Mode Enabled!",
-    "disable": "Undead Mode Disabled!",
-    "state": "Undead Mode: {0}",
-    "input": "Enable undead mode? (optional)"
+    "undeadmode": {
+      "name": "Undead mode",
+      "description": "Toggles undead mode on/off.",
+      "input": "Enable undead mode? (optional)"
+    }
   }
 }

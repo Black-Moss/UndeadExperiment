@@ -18,56 +18,57 @@ public class Plugin : BaseUnityPlugin
     private static Plugin Instance { get; set; } = null!;
     
     // General
-    public static ConfigEntry<float> ConfigHealCountdown;
-    public static ConfigEntry<bool>  ConfigUndeadMode;
+    public static ConfigEntry<float> HealCountdown;
+    public static ConfigEntry<bool>  UndeadMode;
+    public static ConfigEntry<bool>  SwitchModeTip;
     
     // Limb
-    public static ConfigEntry<float> ConfigMuscleHeadth;
-    public static ConfigEntry<float> ConfigSkinHealth;
-    public static ConfigEntry<float> ConfigBoneHealTImer;
-    public static ConfigEntry<float> ConfigDislocationTimer;
-    public static ConfigEntry<float> ConfigInfectionAmount;
-    public static ConfigEntry<float> ConfigBleedAmount;
-    public static ConfigEntry<float> ConfigPainkillers;
-    public static ConfigEntry<int>   ConfigShrapnel;
-    public static ConfigEntry<bool>  ConfigInfected;
-    public static ConfigEntry<bool>  ConfigDismembered;
-    public static ConfigEntry<bool>  ConfigBlockedBleeding;
+    public static ConfigEntry<float> MuscleHeadth;
+    public static ConfigEntry<float> SkinHealth;
+    public static ConfigEntry<float> BoneHealTImer;
+    public static ConfigEntry<float> DislocationTimer;
+    public static ConfigEntry<float> InfectionAmount;
+    public static ConfigEntry<float> BleedAmount;
+    public static ConfigEntry<float> Painkillers;
+    public static ConfigEntry<int>   Shrapnel;
+    public static ConfigEntry<bool>  Infected;
+    public static ConfigEntry<bool>  Dismembered;
+    public static ConfigEntry<bool>  BlockedBleeding;
     
     // Body
-    public static ConfigEntry<float> ConfigBrainHealth;
-    public static ConfigEntry<float> ConfigBloodAmount;
-    public static ConfigEntry<int>   ConfigBloodViscous;
-    public static ConfigEntry<float> ConfigOxygenAmount;
-    public static ConfigEntry<float> ConfigHunger;
-    public static ConfigEntry<float> ConfigThirst;
-    public static ConfigEntry<float> ConfigTemperature;
-    public static ConfigEntry<float> ConfigConsciousness;
-    public static ConfigEntry<float> ConfigStamina;
-    public static ConfigEntry<float> ConfigEnergy;
-    public static ConfigEntry<float> ConfigSicknessAmount;
-    public static ConfigEntry<float> ConfigSepticShock;
-    public static ConfigEntry<float> ConfigRadiationSickness;
-    public static ConfigEntry<float> ConfigTraumaAmount;
-    public static ConfigEntry<float> ConfigInternalBleeding;
-    public static ConfigEntry<float> ConfigHemothorax;
-    public static ConfigEntry<float> ConfigDirtyness;
-    public static ConfigEntry<float> ConfigWetness;
-    public static ConfigEntry<float> ConfigHappiness;
-    public static ConfigEntry<float> ConfigAntidepressantHappiness;
-    public static ConfigEntry<float> ConfigOpiateHappiness;
-    public static ConfigEntry<float> ConfigHearingLoss;
-    public static ConfigEntry<float> ConfigWeightOffset;
-    public static ConfigEntry<float> ConfigBadSleepAmount;
-    public static ConfigEntry<float> ConfigAdrenaline;
-    public static ConfigEntry<float> ConfigCurAdrenaline;
-    public static ConfigEntry<float> ConfigAntibioticImmunityTime;
-    public static ConfigEntry<float> ConfigBrainGrowSickness;
-    public static ConfigEntry<bool>  ConfigDisfigured;
-    public static ConfigEntry<bool>  ConfigEyeGone;
-    public static ConfigEntry<bool>  ConfigTriedRollingLastStand;
-    public static ConfigEntry<bool>  ConfigSuccesfullyRolledLastStand;
-    public static ConfigEntry<float> ConfigLastStandTime;
+    public static ConfigEntry<float> BrainHealth;
+    public static ConfigEntry<float> BloodAmount;
+    public static ConfigEntry<int>   BloodViscous;
+    public static ConfigEntry<float> OxygenAmount;
+    public static ConfigEntry<float> Hunger;
+    public static ConfigEntry<float> Thirst;
+    public static ConfigEntry<float> Temperature;
+    public static ConfigEntry<float> Consciousness;
+    public static ConfigEntry<float> Stamina;
+    public static ConfigEntry<float> Energy;
+    public static ConfigEntry<float> SicknessAmount;
+    public static ConfigEntry<float> SepticShock;
+    public static ConfigEntry<float> RadiationSickness;
+    public static ConfigEntry<float> TraumaAmount;
+    public static ConfigEntry<float> InternalBleeding;
+    public static ConfigEntry<float> Hemothorax;
+    public static ConfigEntry<float> Dirtyness;
+    public static ConfigEntry<float> Wetness;
+    public static ConfigEntry<float> Happiness;
+    public static ConfigEntry<float> AntidepressantHappiness;
+    public static ConfigEntry<float> OpiateHappiness;
+    public static ConfigEntry<float> HearingLoss;
+    public static ConfigEntry<float> WeightOffset;
+    public static ConfigEntry<float> BadSleepAmount;
+    public static ConfigEntry<float> Adrenaline;
+    public static ConfigEntry<float> CurAdrenaline;
+    public static ConfigEntry<float> AntibioticImmunityTime;
+    public static ConfigEntry<float> BrainGrowSickness;
+    public static ConfigEntry<bool>  Disfigured;
+    public static ConfigEntry<bool>  EyeGone;
+    public static ConfigEntry<bool>  TriedRollingLastStand;
+    public static ConfigEntry<bool>  SuccesfullyRolledLastStand;
+    public static ConfigEntry<float> LastStandTime;
 
     private void Awake()
     {
@@ -78,240 +79,247 @@ public class Plugin : BaseUnityPlugin
         _harmony.PatchAll();
         
         //  General
-        ConfigHealCountdown = Config.Bind(
+        HealCountdown = Config.Bind(
             "General",
-            "HealCountdown",
+            "Heal Countdown",
             1f
         );
-        ConfigUndeadMode = Config.Bind(
+        UndeadMode = Config.Bind(
             "General",
-            "UndeadMode",
+            "Undead Mode",
+            true
+        );
+        SwitchModeTip = Config.Bind(
+            "General",
+            "Switch Mode Tip",
             true
         );
 
         // Limb
-        ConfigMuscleHeadth = Config.Bind(
+        MuscleHeadth = Config.Bind(
             "Limb",
-            "MuscleHealth",
+            "Muscle Health",
             100f
         );
-        ConfigSkinHealth = Config.Bind(
+        SkinHealth = Config.Bind(
             "Limb",
-            "SkinHealth",
+            "Skin Health",
             100f
         );
-        ConfigBoneHealTImer = Config.Bind(
+        BoneHealTImer = Config.Bind(
             "Limb",
-            "BoneHealTImer",
+            "Bone Heal TImer",
             0.0f
         );
-        ConfigDislocationTimer = Config.Bind(
+        DislocationTimer = Config.Bind(
             "Limb",
-            "DislocationTimer",
+            "Dislocation Timer",
             0.0f
         );
-        ConfigInfectionAmount = Config.Bind(
+        InfectionAmount = Config.Bind(
             "Limb",
-            "InfectionAmount",
+            "Infection Amount",
             0.0f
         );
-        ConfigBleedAmount = Config.Bind(
+        BleedAmount = Config.Bind(
             "Limb",
-            "BleedAmount",
+            "Bleed Amount",
             0.0f
         );
-        ConfigPainkillers = Config.Bind(
+        Painkillers = Config.Bind(
             "Limb",
             "Painkillers",
             0.0f
         );
-        ConfigShrapnel = Config.Bind(
+        Shrapnel = Config.Bind(
             "Limb",
             "Shrapnel",
             0
         );
-        ConfigInfected = Config.Bind(
+        Infected = Config.Bind(
             "Limb",
             "Infected",
             false
         );
-        ConfigDismembered = Config.Bind(
+        Dismembered = Config.Bind(
             "Limb",
             "Dismembered",
             false
         );
-        ConfigBlockedBleeding = Config.Bind(
+        BlockedBleeding = Config.Bind(
             "Limb",
-            "BlockedBleeding",
+            "Blocked Bleeding",
             false
         );
         
         // Body
-        ConfigBrainHealth = Config.Bind(
+        BrainHealth = Config.Bind(
             "Body",
-            "BrainHealth",
+            "Brain Health",
             100f
         );
-        ConfigBloodAmount = Config.Bind(
+        BloodAmount = Config.Bind(
             "Body",
-            "BloodAmount",
+            "Blood Amount",
             100f
         );
-        ConfigBloodViscous = Config.Bind(
+        BloodViscous = Config.Bind(
             "Body",
-            "BloodViscous",
+            "Blood Viscous",
             0
         );
-        ConfigOxygenAmount = Config.Bind(
+        OxygenAmount = Config.Bind(
             "Body",
-            "OxygenAmount",
+            "Oxygen Amount",
             100f
         );
-        ConfigHunger = Config.Bind(
+        Hunger = Config.Bind(
             "Body",
             "Hunger",
             100f
         );
-        ConfigThirst = Config.Bind(
+        Thirst = Config.Bind(
             "Body",
             "Thirst",
             100f
         );
-        ConfigTemperature = Config.Bind(
+        Temperature = Config.Bind(
             "Body",
             "Temperature",
             37f
         );
-        ConfigConsciousness = Config.Bind(
+        Consciousness = Config.Bind(
             "Body",
             "Consciousness",
             100f
         );
-        ConfigStamina = Config.Bind(
+        Stamina = Config.Bind(
             "Body",
             "Stamina",
             100f
         );
-        ConfigEnergy = Config.Bind(
+        Energy = Config.Bind(
             "Body",
             "Energy",
             100f
         );
-        ConfigSicknessAmount = Config.Bind(
+        SicknessAmount = Config.Bind(
             "Body",
-            "SicknessAmount",
+            "Sickness Amount",
             0.0f
         );
-        ConfigSepticShock = Config.Bind(
+        SepticShock = Config.Bind(
             "Body",
-            "SepticShock",
+            "Septic Shock",
             0.0f
         );
-        ConfigRadiationSickness = Config.Bind(
+        RadiationSickness = Config.Bind(
             "Body",
-            "RadiationSickness",
+            "Radiation Sickness",
             0.0f
         );
-        ConfigTraumaAmount = Config.Bind(
+        TraumaAmount = Config.Bind(
             "Body",
-            "TraumaAmount",
+            "Trauma Amount",
             0.0f
         );
-        ConfigInternalBleeding = Config.Bind(
+        InternalBleeding = Config.Bind(
             "Body",
-            "InternalBleeding",
+            "Internal Bleeding",
             0.0f
         );
-        ConfigHemothorax = Config.Bind(
+        Hemothorax = Config.Bind(
             "Body",
             "Hemothorax",
             0.0f
         );
-        ConfigDirtyness = Config.Bind(
+        Dirtyness = Config.Bind(
             "Body",
             "Dirtyness",
             0.0f
         );
-        ConfigWetness = Config.Bind(
+        Wetness = Config.Bind(
             "Body",
             "Wetness",
             0.0f
         );
-        ConfigHappiness = Config.Bind(
+        Happiness = Config.Bind(
             "Body",
             "Happiness",
             0.0f
         );
-        ConfigAntidepressantHappiness = Config.Bind(
+        AntidepressantHappiness = Config.Bind(
             "Body",
-            "AntidepressantHappiness",
+            "Antidepressant Happiness",
             0.0f
         );
-        ConfigOpiateHappiness = Config.Bind(
+        OpiateHappiness = Config.Bind(
             "Body",
-            "OpiateHappiness",
+            "Opiate Happiness",
             0.0f
         );
-        ConfigHearingLoss = Config.Bind(
+        HearingLoss = Config.Bind(
             "Body",
-            "HearingLoss",
+            "Hearing Loss",
             0.0f
         );
-        ConfigWeightOffset = Config.Bind(
+        WeightOffset = Config.Bind(
             "Body",
-            "WeightOffset",
+            "Weight Offset",
             0.0f
         );
-        ConfigBadSleepAmount = Config.Bind(
+        BadSleepAmount = Config.Bind(
             "Body",
-            "BadSleepAmount",
+            "BadSleep Amount",
             0.0f
         );
-        ConfigAdrenaline = Config.Bind(
+        Adrenaline = Config.Bind(
             "Body",
             "Adrenaline",
             0.0f
         );
-        ConfigCurAdrenaline = Config.Bind(
+        CurAdrenaline = Config.Bind(
             "Body",
-            "CurAdrenaline",
+            "Cur Adrenaline",
             0.0f
         );
-        ConfigAntibioticImmunityTime = Config.Bind(
+        AntibioticImmunityTime = Config.Bind(
             "Body",
-            "AntibioticImmunityTime",
+            "Antibiotic Immunity Time",
             0.0f
         );
-        ConfigBrainGrowSickness = Config.Bind(
+        BrainGrowSickness = Config.Bind(
             "Body",
-            "BrainGrowSickness",
+            "Brain Grow Sickness",
             0.0f
         );
-        ConfigDisfigured = Config.Bind(
+        Disfigured = Config.Bind(
             "Body",
             "Disfigured",
             false
         );
-        ConfigEyeGone = Config.Bind(
+        EyeGone = Config.Bind(
             "Body",
             "EyeGone",
             false
         );
-        ConfigTriedRollingLastStand = Config.Bind(
+        TriedRollingLastStand = Config.Bind(
             "Body",
-            "TriedRollingLastStand",
+            "Tried Rolling Last Stand",
             false
         );
-        ConfigSuccesfullyRolledLastStand = Config.Bind(
+        SuccesfullyRolledLastStand = Config.Bind(
             "Body",
-            "SuccesfullyRolledLastStand",
+            "Succesfully Rolled LastStand",
             false
         );
-        ConfigLastStandTime = Config.Bind(
+        LastStandTime = Config.Bind(
             "Body",
-            "LastStandTime",
+            "Last Stand Time",
             -1000f
         );
+        
+        ModConfigs.Update();
     }
 
     [HarmonyPatch(typeof(Body), "Update")]
